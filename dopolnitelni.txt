@@ -30,3 +30,20 @@ public class SecurityConfig {
     }
 }
 ...................................................................................................
+ Намести PasswordEncoder во ExampleApplication
+Под функцијата void main() стави ја следната функција:
+@Bean
+public PasswordEncoder passwordEncoder(){
+   return new BCryptPasswordEncoder();}
+
+VO USER SERVICE:
+Ја додаваме зависноста PasswordEncoder:
+private final PasswordEncoder passwordEncoder;
+public UserServiceImpl(PasswordEncoder passwordEncoder) {
+   this.passwordEncoder = passwordEncoder;}
+Во /service/impl ако има функции каде што се работи со password треба да користиме passwordEncoder.encode(password); најчесто во create() и update().
+.........................................................................................
+@Enumerated(EnumType.STRING) ако се користи променливата за енумерација.
+@ManyToOne, @OneToMany за релации меѓу табелтите.
+@ManyToMany(fetch = FetchType.EAGER) ако користиме  мора да потенцираме каков FetchType има инаку нема да ни работи апликацијата.
+@Table(name="shop_user") ако табелата се вика User мора да се употреби ова за rename.
