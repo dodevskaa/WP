@@ -47,3 +47,61 @@ public UserServiceImpl(PasswordEncoder passwordEncoder) {
 @ManyToOne, @OneToMany за релации меѓу табелтите.
 @ManyToMany(fetch = FetchType.EAGER) ако користиме  мора да потенцираме каков FetchType има инаку нема да ни работи апликацијата.
 @Table(name="shop_user") ако табелата се вика User мора да се употреби ова за rename.
+.......................................
+@PostMapping: create, update, delete, dopolnitelnoto
+....................................
+1) Vo list.html 
+For each subject ....
+<tr class="item" th:each="ime_3 : ${ime_sto e vo List<> vo Controlerot show}">
+VO OVA <tr SE PISUVA <th:text="${ime_3.name}">[...]</td> 
+
+For each project's category display one
+<li>[cat.name]</li>
+VO OVA SE PISUVA <th:each="cat:${player.categories}" 
+th:text="${cat.name}"
+<td <th: text ="${prod.creator}">
+......................................
+@GetMapping({""})
+..showAdd(Model model){
+model.addAttribute("ime_1", imeService.listAll()); ----ova se pisuva za dolgite sto se vo form.html
+
+Vo list.html: 
+patekata se stava vo postController.showAdd
+
+Vo form.html
+kaj dolgite se pisuva: 
+<optional th:each "imeto od value":${ime_1}" 
+th:value="${ime_1}"
+th:text="${ime_1}"
+th:selected="${}">
+...................................
+za create:
+@PostMapping
+na site atributi se pisuva @RequestParm
+
+vo form.html se dodavaat iminjata na atributite kako sto se vo Controllerot vo delot name=""
+...return "redirect:/patekata"
+...................................
+za delete:
+@PostMapping
+na atributite se pisuva @PathVariable
+
+Vo list.html se pisuva patekata vo delete
+<form th:method="POST"
+th:action="@{'patekata od delete' (id=${ime.getId()})}">
+.....................................
+za edit:
+@GetMapping 
+showEdit(@PathVariable Long id, Model model)
+
+Vo list.html 
+...showEditt
+<a th:heef=istoto kako vo delete samo mesto /delete se pisuva /edit
+
+Vo form.html
+posle sekoe name="ime_5" se dodava th:value="${players.ime_5}"
+...................................
+za update
+@PostMapping
+prvoto e @PathVariable (id)
+site drugi @RequestParm
