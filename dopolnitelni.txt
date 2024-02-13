@@ -1,0 +1,32 @@
+Player VOTE/FOLLOW (Long id){
+Player player = playerRepository.findById(id);
+player.setVotes(player.getVotes()+1); //pisuva vo zadacata deka treba da se zgolemi za 1
+return playerRepository.save(player);
+}
+
+.....................................................................
+@Override
+    public VirtualServer markTerminated(Long id) {
+        VirtualServer toTerminate = findById(id);
+        toTerminate.setTerminated(true);
+        return virtualServerRepository.save(toTerminate);
+
+.....................................................................................
+ VO LIST.HTML
+<th:block th:if="${VirtualServer.getTerminated()==false}"> ----ZA DA SE HIDE KOPCETO
+                <!-- VirtualServerController.markTerminated (Visible only when the virtual server is not terminated)-->
+                <form th:method="POST" th:action="@{/VirtualServers/{id}/terminate (id=${VirtualServer.getId()})}">
+                    <button class="change-item">Terminate</button>
+                </form>
+                </th:block>
+            </td>
+.............................................................................................
+@Configuration
+public class SecurityConfig {
+    @Bean
+    // TODO: If you are implementing the security requirements, remove this following bean creation
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().anyRequest();
+    }
+}
+...................................................................................................
